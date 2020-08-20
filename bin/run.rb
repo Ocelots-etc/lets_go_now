@@ -1,13 +1,9 @@
 require_relative '../config/environment'
 require_relative '../lib/cli_methods.rb'
 
-
-
-# puts "HELLO WORLD"
-
 def run
-  puts "Hello, welcome to Lets Go Now app!"
-  #help
+  puts "Hi, welcome to Lets Go Now app!"
+
   user_input = ""
   while user_input
     puts "Lets Go"
@@ -32,13 +28,12 @@ def run
         address_instance
       end
       if !address_instance
-      puts "Please choose from following options (enter a or b):
-      a. Enter a new address
-      b. Retrieve your saved addresses"
+      puts "Please choose from following options (enter 1 or 2):
+      1. Enter a new address
+      2. Retrieve your saved addresses"
         next
       end
-      # new_address = gets.chomp.downcase
-      # user.add_address_for_user(new_address)
+
       puts "Please choose from any of the following options (enter 3 or 4):
         3. Find the nearest place to go
         4. Find the nearest 3 places to go"
@@ -56,6 +51,41 @@ def run
         next
       end
 
-      puts Rainbow("Please choose from following options (enter 3 or 4):
+      puts "Please choose from following options (enter 3 or 4):
         3. Find the nearest place to go
-        4. Find the nearest 3 places to go"
+        4. Find the nearest place to go"
+
+      when "3"
+        puts "Please wait while I find your nearest place to go..."
+        distance = address_instance.distance_to_nearest_place_to_go
+        nearest_place_to_go = address_instance.find_place_to_go(distance)
+        puts "Your nearest place to go is: #{nearest_place_to_go.name} (#{distance.round(10)} miles)."
+        puts "Please choose from the next following options (enter 5 or 6):
+        5. Description of #{nearest_place_to_go.name}
+        6. Weather at #{nearest_place_to_go.name}"
+
+      when "4"
+        puts "Please wait while I find your nearest place to go...
+          "
+        distance = address_instance.distance_to_nearest_place_to_go
+        puts "This is your nearest place to go: #{nearest_place_to_go.name}"
+
+      when "5"
+        Description = nearest_place_to_go.description
+        puts "The Description of #{nearest_place_to_go.name} is #{Description}."
+      when "f"
+        Weather = nearest_place_to_go.weather
+        puts "The weather at #{nearest_place_to_go.name} is #{Weather}."
+      when "sign up"
+        sign_up
+      when "exit"
+        exit
+        break
+      else
+        puts "Sorry, I don't understand. Please try again."
+        help
+      end
+    end
+  end
+
+  run
