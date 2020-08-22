@@ -1,4 +1,4 @@
-require_relative '../config/environment'
+require_relative '../config/development'
 require_relative '../lib/cli_methods.rb'
 
 def run
@@ -30,30 +30,13 @@ def run
       if !address_instance
       puts "Please choose from following options (enter 1 or 2):
       1. Enter a new address
-      2. Retrieve your saved addresses"
+      2. Find the nearest place to go"
         next
       end
 
       puts "Please choose from any of the following options (enter 3 or 4):
-        3. Find the nearest place to go
-        4. Find the nearest 3 places to go"
-
-    when "2"
-      puts "These are your saved addresses:"
-      user.all_addresses_for_user
-      puts "Please enter an address:"
-      user_address = gets.chomp.downcase
-      address_instance = enter_address(user, user_address)
-      if !address_instance
-      puts "Please choose from any of the following options (enter 1 or 2):
-      1. Enter a new address
-      2. Retrieve your saved addresses"
-        next
-      end
-
-      puts "Please choose from following options (enter 3 or 4):
-        3. Find the nearest place to go
-        4. Find the nearest place to go"
+        3. Find the nearest 3 places to go
+        4. Description of #{nearest_place_to_go.name}"
 
       when "3"
         puts "Please wait while I find your nearest place to go..."
@@ -70,12 +53,6 @@ def run
         distance = address_instance.distance_to_nearest_place_to_go
         puts "This is your nearest place to go: #{nearest_place_to_go.name}"
 
-      when "5"
-        Description = nearest_place_to_go.description
-        puts "The Description of #{nearest_place_to_go.name} is #{Description}."
-      when "f"
-        Weather = nearest_place_to_go.weather
-        puts "The weather at #{nearest_place_to_go.name} is #{Weather}."
       when "sign up"
         sign_up
       when "exit"
