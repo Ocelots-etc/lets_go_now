@@ -1,7 +1,7 @@
 require "bundler/gem_tasks"
 task :default => :spec
 
-require_relative 'config/environment'
+require_relative 'config/development'
 require 'sinatra/activerecord/rake'
 
 desc 'starts a console'
